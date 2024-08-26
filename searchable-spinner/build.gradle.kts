@@ -28,9 +28,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
+        singleVariant("release")
     }
 }
 
