@@ -6,5 +6,6 @@
         <attr name="hint" format="string" />
         <attr name="header" format="string" />
         <attr name="background" value="reference" />
+        <attr name="text" value="string" />
     </declare-styleable>
 </resources>

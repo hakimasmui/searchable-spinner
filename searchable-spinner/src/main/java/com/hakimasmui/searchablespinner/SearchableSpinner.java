@@ -35,6 +35,7 @@ public class SearchableSpinner extends LinearLayout {
     Drawable background;
     String hint;
     String header;
+    String text;
     List<String> items = new ArrayList<>();
 
     OnItemSelected onItemSelected;
@@ -49,6 +50,7 @@ public class SearchableSpinner extends LinearLayout {
         background = s.getDrawable(R.styleable.SearchableSpinner_background);
         hint = s.getString(R.styleable.SearchableSpinner_hint);
         header = s.getString(R.styleable.SearchableSpinner_header);
+        text = s.getString(R.styleable.SearchableSpinner_text);
 
         s.recycle();
 
@@ -132,6 +134,10 @@ public class SearchableSpinner extends LinearLayout {
 
     public void setItems(List<String> items) {
         this.items = items;
+    }
+
+    public void setLabelSelected(String string) {
+        label.setText(string);
     }
 
     public interface OnItemSelected {
