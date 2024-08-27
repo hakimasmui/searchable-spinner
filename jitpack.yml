@@ -1,4 +1,4 @@
 jdk:
   - openjdk17
-install:
-  - ./gradlew :library:publishReleasePublicationToMavenLocal
+before_install:
+  - ./scripts/prepareJitpackEnvironment.sh
