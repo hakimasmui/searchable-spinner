@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         spinner.setItems(items);
         spinner.setOnItemSelected(new SearchableSpinner.OnItemSelected() {
             @Override
-            public void onSelected(AdapterView adapter, View view, int i, long l) {
-                Log.d("fatih", adapter.getSelectedItemId()+" "+i+" "+l);
+            public void onSelected(String nama, int position) {
+                Log.d("fatih", nama+" "+position);
             }
         });
     }

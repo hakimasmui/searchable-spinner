@@ -92,7 +92,7 @@ public class SearchableSpinner extends LinearLayout {
             if (adapter.getItem(i) != null) {
                 label.setText(adapter.getItem(i));
                 if (onItemSelected != null) {
-                    onItemSelected.onSelected(adapterView, view, i, l);
+                    onItemSelected.onSelected(adapter.getItem(i), i);
                 }
             }
             dialog.dismiss();
@@ -135,7 +135,7 @@ public class SearchableSpinner extends LinearLayout {
     }
 
     public interface OnItemSelected {
-        void onSelected(AdapterView adapter, View view, int i, long l);
+        void onSelected(String nama, int position);
     }
 
     public void setOnItemSelected(OnItemSelected onItemSelected) {
