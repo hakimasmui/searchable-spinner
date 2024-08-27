@@ -61,6 +61,8 @@ public class SearchableSpinner extends LinearLayout {
         relSpinner = v.findViewById(R.id.relSpinner);
         label = v.findViewById(R.id.label);
 
+        label.setText(text);
+
         if (background != null) {
             relSpinner.setBackground(background);
         }
