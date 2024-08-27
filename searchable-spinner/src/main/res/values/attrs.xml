@@ -5,5 +5,6 @@
         <attr name="font" value="reference" />
         <attr name="hint" format="string" />
         <attr name="header" format="string" />
+        <attr name="background" value="reference" />
     </declare-styleable>
 </resources>

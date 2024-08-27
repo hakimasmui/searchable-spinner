@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,9 +27,11 @@ import java.util.List;
 public class SearchableSpinner extends LinearLayout {
 
     LinearLayout linSpinner;
+    RelativeLayout relSpinner;
     TextView label;
 
     Typeface font;
+    Drawable background;
     String hint;
     String header;
     List<String> items = new ArrayList<>();
@@ -42,6 +46,7 @@ public class SearchableSpinner extends LinearLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             font = s.getFont(R.styleable.SearchableSpinner_font);
         }
+        background = s.getDrawable(R.styleable.SearchableSpinner_background);
         hint = s.getString(R.styleable.SearchableSpinner_hint);
         header = s.getString(R.styleable.SearchableSpinner_header);
 
@@ -51,7 +56,12 @@ public class SearchableSpinner extends LinearLayout {
         View v = inflater.inflate(R.layout.spinner, this, true);
 
         linSpinner = v.findViewById(R.id.linSpinner);
+        relSpinner = v.findViewById(R.id.relSpinner);
         label = v.findViewById(R.id.label);
+
+        if (background != null) {
+            relSpinner.setBackground(background);
+        }
 
         linSpinner.setOnClickListener(view -> {
             dialogPilihan(context, hint);
