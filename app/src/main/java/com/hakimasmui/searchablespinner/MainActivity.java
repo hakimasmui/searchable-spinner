@@ -3,6 +3,8 @@ package com.hakimasmui.searchablespinner;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         spinner.setItems(items);
         spinner.setOnItemSelected(new SearchableSpinner.OnItemSelected() {
             @Override
-            public void onSelected(String string) {
-                Log.d("fatih", string);
+            public void onSelected(AdapterView adapter, View view, int i, long l) {
+                Log.d("fatih", adapter.getSelectedItemId()+" "+i+" "+l);
             }
         });
     }

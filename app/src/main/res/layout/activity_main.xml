@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="80dp"
+        app:background="@drawable/bg_green_fullrounded"
         app:font="@font/montserrat_semibold"
         app:header="Pilih atau Cari Kategori"
         app:hint="Ketik disini untuk mencari..." />

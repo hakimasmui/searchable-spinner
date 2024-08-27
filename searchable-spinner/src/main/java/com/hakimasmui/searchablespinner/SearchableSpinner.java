@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,7 +36,6 @@ public class SearchableSpinner extends LinearLayout {
     String hint;
     String header;
     List<String> items = new ArrayList<>();
-    List<String> itemsOriginal = new ArrayList<>();
 
     OnItemSelected onItemSelected;
 
@@ -92,7 +92,7 @@ public class SearchableSpinner extends LinearLayout {
             if (adapter.getItem(i) != null) {
                 label.setText(adapter.getItem(i));
                 if (onItemSelected != null) {
-                    onItemSelected.onSelected(adapter.getItem(i));
+                    onItemSelected.onSelected(adapterView, view, i, l);
                 }
             }
             dialog.dismiss();
@@ -131,12 +131,11 @@ public class SearchableSpinner extends LinearLayout {
     }
 
     public void setItems(List<String> items) {
-        this.itemsOriginal = items;
-        this.items = itemsOriginal;
+        this.items = items;
     }
 
     public interface OnItemSelected {
-        void onSelected(String string);
+        void onSelected(AdapterView adapter, View view, int i, long l);
     }
 
     public void setOnItemSelected(OnItemSelected onItemSelected) {
