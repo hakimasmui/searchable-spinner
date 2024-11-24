@@ -7,5 +7,6 @@
         <attr name="header" format="string" />
         <attr name="background" value="reference" />
         <attr name="text" value="string" />
+        <attr name="label" value="string" />
     </declare-styleable>
 </resources>

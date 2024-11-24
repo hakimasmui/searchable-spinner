@@ -29,13 +29,14 @@ public class SearchableSpinner extends LinearLayout {
 
     LinearLayout linSpinner;
     RelativeLayout relSpinner;
-    TextView label;
+    TextView text1, label1;
 
     Typeface font;
     Drawable background;
     String hint;
     String header;
     String text;
+    String label;
     List<String> items = new ArrayList<>();
 
     OnItemSelected onItemSelected;
@@ -51,6 +52,7 @@ public class SearchableSpinner extends LinearLayout {
         hint = s.getString(R.styleable.SearchableSpinner_hint);
         header = s.getString(R.styleable.SearchableSpinner_header);
         text = s.getString(R.styleable.SearchableSpinner_text);
+        label = s.getString(R.styleable.SearchableSpinner_label);
 
         s.recycle();
 
@@ -59,9 +61,11 @@ public class SearchableSpinner extends LinearLayout {
 
         linSpinner = v.findViewById(R.id.linSpinner);
         relSpinner = v.findViewById(R.id.relSpinner);
-        label = v.findViewById(R.id.label);
+        text1 = v.findViewById(R.id.text1);
+        label1 = v.findViewById(R.id.label1);
 
-        label.setText(text);
+        label1.setText(label);
+        text1.setText(text);
 
         if (background != null) {
             relSpinner.setBackground(background);
@@ -94,7 +98,7 @@ public class SearchableSpinner extends LinearLayout {
         listItem.setAdapter(adapter);
         listItem.setOnItemClickListener((adapterView, view, i, l) -> {
             if (adapter.getItem(i) != null) {
-                label.setText(adapter.getItem(i));
+                text1.setText(adapter.getItem(i));
                 if (onItemSelected != null) {
                     onItemSelected.onSelected(adapter.getItem(i), i);
                 }
@@ -139,7 +143,7 @@ public class SearchableSpinner extends LinearLayout {
     }
 
     public void setLabelSelected(String string) {
-        label.setText(string);
+        text1.setText(string);
     }
 
     public interface OnItemSelected {
