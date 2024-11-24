@@ -27,7 +27,6 @@ import java.util.List;
 
 public class SearchableSpinner extends LinearLayout {
 
-    LinearLayout linSpinner;
     RelativeLayout relSpinner;
     TextView text1, label1;
 
@@ -59,7 +58,6 @@ public class SearchableSpinner extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.spinner, this, true);
 
-        linSpinner = v.findViewById(R.id.linSpinner);
         relSpinner = v.findViewById(R.id.relSpinner);
         text1 = v.findViewById(R.id.text1);
         label1 = v.findViewById(R.id.label1);
@@ -71,7 +69,7 @@ public class SearchableSpinner extends LinearLayout {
             relSpinner.setBackground(background);
         }
 
-        linSpinner.setOnClickListener(view -> {
+        relSpinner.setOnClickListener(view -> {
             dialogPilihan(context, hint);
         });
     }
