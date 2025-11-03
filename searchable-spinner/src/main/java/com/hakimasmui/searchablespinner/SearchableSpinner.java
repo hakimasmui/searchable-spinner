@@ -37,6 +37,8 @@ public class SearchableSpinner extends LinearLayout {
     String text;
     String label;
     List<String> items = new ArrayList<>();
+    List<DataItem> dataItems = new ArrayList<>();
+    boolean useDataItem = false;
 
     OnItemSelected<?> onItemSelected;
 
@@ -70,7 +72,10 @@ public class SearchableSpinner extends LinearLayout {
         }
 
         relSpinner.setOnClickListener(view -> {
-            dialogPilihan(context, hint);
+            if (useDataItem)
+                dialogPilihan(context, hint, dataItems);
+            else
+                dialogPilihan(context, hint);
         });
     }
 
@@ -196,6 +201,12 @@ public class SearchableSpinner extends LinearLayout {
 
     public void setItems(List<String> items) {
         this.items = items;
+        this.useDataItem = false;
+    }
+
+    public void setDataItems(List<DataItem> items) {
+        this.dataItems = items;
+        this.useDataItem = true; // tandai kalau spinner ini pakai model DataItem
     }
 
     public void setLabelSelected(String string) {

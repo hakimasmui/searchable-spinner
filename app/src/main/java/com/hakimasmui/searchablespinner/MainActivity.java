@@ -29,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
         items.add(" ");
 
         spinner = findViewById(R.id.spinner);
-        spinner.setItems(items);
+//        spinner.setItems(items);
         spinner.setOnItemSelected((SearchableSpinner.OnItemSelected) (item, position) -> {
             DataItem dataItem = (DataItem) item;
+        });
+        spinner.setOnItemSelected((item, position) -> {
+            Log.d("fatih", (String) item);
         });
     }
 }
