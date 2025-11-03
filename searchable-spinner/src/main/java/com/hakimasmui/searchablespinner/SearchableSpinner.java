@@ -38,7 +38,7 @@ public class SearchableSpinner extends LinearLayout {
     String label;
     List<String> items = new ArrayList<>();
 
-    OnItemSelected onItemSelected;
+    OnItemSelected<?> onItemSelected;
 
     public SearchableSpinner(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -97,8 +97,66 @@ public class SearchableSpinner extends LinearLayout {
         listItem.setOnItemClickListener((adapterView, view, i, l) -> {
             if (adapter.getItem(i) != null) {
                 text1.setText(adapter.getItem(i));
-                if (onItemSelected != null) {
-                    onItemSelected.onSelected(adapter.getItem(i), i);
+                if (onItemSelected instanceof OnItemSelected<?>) {
+                    ((OnItemSelected<String>) onItemSelected).onSelected(adapter.getItem(i), i);
+                }
+            }
+            dialog.dismiss();
+        });
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        tvHeader.setText(header);
+        edtSearch.setHint(hint);
+
+        dialog.setView(vi);
+
+        try {
+            dialog.show();
+
+            dialog.getWindow().setLayout(new RoundDialog().getWidth(context), ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void dialogPilihan(Context context, String hint, List<DataItem> items) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(true);
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View vi = inflater.inflate(R.layout.dialog_pilihan, null);
+        TextView tvHeader = vi.findViewById(R.id.header);
+        EditText edtSearch = vi.findViewById(R.id.edtSearch);
+        ListView listItem = vi.findViewById(R.id.listItem);
+
+        if (font != null)
+            tvHeader.setTypeface(font);
+
+        ArrayAdapter<DataItem> adapter = new DataItemsAdapter(context, items, font);
+        listItem.setAdapter(adapter);
+        listItem.setOnItemClickListener((adapterView, view, i, l) -> {
+            if (adapter.getItem(i) != null) {
+                text1.setText(adapter.getItem(i).getName());
+                if (onItemSelected instanceof OnItemSelected<?>) {
+                    ((OnItemSelected<DataItem>) onItemSelected).onSelected(adapter.getItem(i), i);
                 }
             }
             dialog.dismiss();
@@ -144,11 +202,11 @@ public class SearchableSpinner extends LinearLayout {
         text1.setText(string);
     }
 
-    public interface OnItemSelected {
-        void onSelected(String nama, int position);
+    public interface OnItemSelected<T> {
+        void onSelected(T item, int position);
     }
 
-    public void setOnItemSelected(OnItemSelected onItemSelected) {
+    public <T> void setOnItemSelected(OnItemSelected<T> onItemSelected) {
         this.onItemSelected = onItemSelected;
     }
 }

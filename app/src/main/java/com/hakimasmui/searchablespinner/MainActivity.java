@@ -30,11 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
         spinner.setItems(items);
-        spinner.setOnItemSelected(new SearchableSpinner.OnItemSelected() {
-            @Override
-            public void onSelected(String nama, int position) {
-                Log.d("fatih", nama+" "+position);
-            }
+        spinner.setOnItemSelected((SearchableSpinner.OnItemSelected) (item, position) -> {
+            DataItem dataItem = (DataItem) item;
         });
     }
 }
